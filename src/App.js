@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import data from './data/single-sample';
 import './App.css';
+import AlbumItem from './components/AlbumItem';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <button>Select</button>
           </div>
         </div>
+        <AlbumItem data={data}/>
       </div>
     </section>
   );
