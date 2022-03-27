@@ -1,23 +1,15 @@
 import logo from './logo.svg';
-import data from './data/single-sample';
+import data from './data/all-sample';
 import './App.css';
-import AlbumItem from './components/AlbumItem';
+import AlbumItem from './components/AlbumItem/index';
 
-function App() {
+function App(props) {
   return (
     <section>
       <div className="container">
-        <div className="song">
-          <div className="song-img">
-            <img src={data.album.images[0].url} className="App-logo" alt="logo" />
-          </div>
-          <div className="song-desc">
-            <p>{data.album.name}</p>
-            <p>{data.artists[0].name}</p>
-            <button>Select</button>
-          </div>
-        </div>
-        <AlbumItem data={data}/>
+        {data.map((x) => {
+          return <AlbumItem key={x.album.id} image={x.album.images[0].url} title={x.album.name} artist={x.artists[0].name} />;
+        })}
       </div>
     </section>
   );
