@@ -1,86 +1,102 @@
-import logo from './logo.svg';
-import data from './data/all-sample';
-import './App.css';
-import AlbumItem from './components/AlbumItem/index';
-import {Component} from "react"
+import { useState } from "react";
+import { formatToMinutesSecond } from "./utils/formatToMinutesSecond";
+import Login from "./pages/Login"
 
-class App extends Component {
-  state = {
-    accessToken: window.location.hash
-      .substring(1, window.location.hash.length - 1)
-      .split("&")[0]
-      .split("=")[1],
-    search: "",
-    data: [],
+
+const Home = () => {
+  const [accessToken, setAccessToken] = useState(window.location.hash
+    .substring(1, window.location.hash.length - 1)
+    .split("&")[0]
+    .split("=")[1])
+  const [search, setSearch] = useState('');
+  const [data, setData] = useState([]);
+  const [selectedData, setSelectedData] = useState([]);
+
+  const handleChange = (e) => {
+    setSearch(e.target.value)
   };
 
-  handleLogin = () => {
-    window.open(
-      `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000/`
-    );
-  };
-
-  handleChange = (e) => {
-    this.setState({
-      search: e.target.value,
-    });
-  };
-
-  handleSearch = () => {
+  const handleSearch = () => {
     fetch(
       "https://api.spotify.com/v1/search?q=" +
-        this.state.search +
-        "&access_token=" +
-        this.state.accessToken +
-        "&type=track"
+      search +
+      "&access_token=" +
+      accessToken +
+      "&type=track"
     )
       .then((data) => data.json())
       .then((data) => {
-        console.log(data);
-        this.setState({
-          data: data.tracks.items,
-        });
+        setData(data.tracks.items)
       });
   };
 
-  render() {
-    return (
-      <div className="App">
-        {this.state.accessToken ? (
-          <>
-            <input onChange={this.handleChange} />
-            <button onClick={this.handleSearch}>Cari</button>
-
-            <div>{this.state.data.map((item) => item.name)}</div>
-          </>
-        ) : (
-          <button onClick={this.handleLogin}>Login</button>
-        )}
-      </div>
-    );
+  const handleSelect = (data) => {
+    if (selectedData.includes(data)) {
+      const findIndex = selectedData.findIndex((v) => v === data);
+      setSelectedData((prevData) => {
+        const newArr =[...prevData.slice(0, findIndex), ...prevData.slice(findIndex+1, prevData.length)];
+        console.log(newArr)
+        return newArr
+      })
+    } else {
+      setSelectedData((prevData) => [...prevData, data])
+    }
   }
-}
-    // console.log(this.state.accessToken)
-    // return (
-    //     <section>
-    //       <div className="container">
-    //         {/* {data.map((x) => {
-    //           return <AlbumItem key={x.album.id} image={x.album.images[0].url} title={x.album.name} artist={x.artists[0].name} />;
-    //         })} */}
-    //         {this.state.accessToken ? (
-    //           <>
-    //             <input onChange={this.handleChange} />
-    //             <button onClick={this.handleSearch}>Cari</button>
-    
-    //             <div>{this.state.data.map((item) => item.name)}</div>
-    //           </>
-    //         ) : (
-    //           <button onClick={this.handleLogin}>Login</button>
-    //         )}
-    //       </div>
-    //     </section>
-    //   );
-//   }
-// }
 
-export default App;
+
+  if(!accessToken) {
+    return <Login />
+  }
+
+return (
+  <div className="layout" style={{ marginTop: 20 }}>
+    <div className="search-box">
+      <input
+        onChange={handleChange}
+        placeholder="Find tracks that you want"
+      />
+      <div className="btn-wrapper">
+        <button className="btn" onClick={handleSearch}>
+          Cari
+        </button>
+      </div>
+    </div>
+
+    <div style={{width:"100%"}}>
+      <table style={{display:"flex", width:"100%"}}>
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody style={{width:"100%"}}>
+          {data.map((item) => (
+            <tr key={item.uri} style={{display:'flex', alignItems:"center", width:"100%", marginBottom:"10px"}}>
+              <td className="">
+                <img
+                  className="img-box"
+                  src={item.album.images[0].url}
+                  alt={item.name}
+                />
+              </td>
+              <td width="90%">
+                <div>{item.name}</div>
+                <div className="item-artist">{item.artists[0].name}</div>
+              </td>
+              <td className="select-box">
+                <div>
+                  {formatToMinutesSecond(item.duration_ms)}
+                </div>
+                <button className="btn" onClick={() => {
+                    handleSelect(item.uri)
+                  }}>{selectedData.includes(item.uri) ? "Deselect" : "Select"}</button>
+              </td>
+
+            </tr>
+          ))}
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+)
+}
+export default Home;
