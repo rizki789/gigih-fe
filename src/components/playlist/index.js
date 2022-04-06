@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { API_SPOTIFY } from "../../utils/constants";
+import { useSelector } from "react-redux";
 
 const Playlist = ({ accessToken }) => {
   const [data, setData] = useState([]);
