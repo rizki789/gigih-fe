@@ -1,11 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
+import { useSelector } from "react-redux"
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { API_SPOTIFY } from "../../utils/constants";
 import { formatToMinutesSecond } from "../../utils/formatToMinutesSecond";
+import { removeAccessToken } from "../../redux/slices/tokenSlice";
+import { useDispatch} from "react-redux";
 
-const Home = ({ accessToken }) => {
+
+const Home = () => {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
@@ -14,6 +18,9 @@ const Home = ({ accessToken }) => {
   const [userId, setUserId] = useState("");
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const accessToken = useSelector(state=>state.token.token);
 
   const getProfileUser = async () => {
     const response = await axios.get(
@@ -176,6 +183,10 @@ const Home = ({ accessToken }) => {
         Add to {playlist.name} Playlist
       </button>
 
+      
+
+      
+
       <div style={{ width: "100%" }} className="text-white mt-4">
         <table style={{ display: "flex", width: "100%" }}>
           <thead>
@@ -220,6 +231,10 @@ const Home = ({ accessToken }) => {
           </tbody>
         </table>
       </div>
+      <button className="button" type="button" onClick={ () => 
+        dispatch(removeAccessToken())}>
+        Logout
+        </button>
     </div>
   );
 };
