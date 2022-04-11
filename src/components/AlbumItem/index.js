@@ -1,5 +1,5 @@
 // import React, { useEffect } from "react";
-import React, { useState } from "react";
+import React from "react";
 import "./track.styles.css";
 
 const AlbumItem = ({ data, selected, setSelected }) => {

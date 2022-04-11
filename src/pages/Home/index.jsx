@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
+import React from 'react';
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -13,7 +13,7 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
-  const [dataPlaylist, setDataPlaylist] = useState([]);
+  const [, setDataPlaylist] = useState([]);
   const [playlist, setPlaylist] = useState("");
   const [userId, setUserId] = useState("");
   const [form, setForm] = useState({});
