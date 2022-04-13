@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setAccessToken } from "../../redux/slices/tokenSlice";
+import "./style.css";
 
 
 const Login = () => {
@@ -38,7 +39,7 @@ const accessTokenfromUrl = window.location.hash
   return (
     <div className="App">
       <div className="btn-wrapper">
-        <h1>Click here..</h1>  
+        <h1>Musikin</h1>  
         <button className="btn bg-secondary1" onClick={() => handleLogin()}>
           Login
         </button>
