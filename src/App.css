@@ -1,34 +1,195 @@
+.layout {
+  width: 90%;
+  padding: 0px 20px;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.album-wrapper {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 22px;
+}
+
+.image-box {
+  position: absolute;
+  bottom: 2;
+  left: 12;
+  color: white;
+  font-weight: bold;
+  font-size: 16pt;
+  overflow-y: hidden;
+}
+
+.overlay {
+  width: 100%;
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  left: 0;
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.image-box-text {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: -20px;
+  margin-left: 12px;
+  color: blue;
+  font-weight: bold;
+  font-size: 16pt;
+  transition: all 500ms;
+  opacity: 0;
+}
+
+.album-info:hover .image-box-text {
+  bottom: 0;
+  margin-bottom: 10px;
+  opacity: 1;
+}
+
+.album-info {
+  display: flex;
+  flex-direction: column;
+  background: #2a3643;
+  padding: 20px;
+  border-radius: 20px;
+  transition: all 200ms;
+  cursor: pointer;
+  max-height: 400px;
+}
+
+.album-info:hover {
+  background-color: rgb(238, 234, 234);
+}
+
+.album-info img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.album-info .album-title {
+  font-size: 16pt;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.album-mini-info {
+  margin-top: 2px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.btn {
+  width: 100%;
+  height: 42px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-wrapper {
+  width: 200px;
+}
+
+.btn-wrapper h1{
+  color: blue;
+  font-weight: bold;
+}
+
+.btn-select {
+  background-color: black;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.select-box {
+  display: flex;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.info-myplaylist {
+  cursor: pointer;
+}
+
+.btn-select:disabled {
+  background-color: rgba(0, 0, 0, 0.7);
+  cursor: not-allowed;
+}
+.btn-select:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.img-box {
+  width: 80px;
+}
+
+.album-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+}
+
+input,
+textarea {
+  border-radius: 10px;
+  padding: 6px 12px;
+  width: 100%;
+}
+
+.search-box {
+  display: flex;
+}
+
+.item-artist {
+  font-size: 10pt;
+}
+
+@media screen and (min-width: 1024px) {
+  .layout {
+    width: 1200px;
+    margin: 0 auto;
   }
-  to {
-    transform: rotate(360deg);
+
+  .album-wrapper {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 92px;
+  }
+
+  .album-info {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .layout {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .album-wrapper {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 92px;
+  }
+
+  .album-info {
+    width: 100%;
   }
 }

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { API_SPOTIFY } from "../../utils/constants";
-import { formatToMinutesSecond } from "../../utils/formatToMinutesSecond";
+import { Button, Input, Textarea } from "@chakra-ui/react";
 import { removeAccessToken } from "../../redux/slices/tokenSlice";
 import { useDispatch } from "react-redux";
 import AlbumList from "../../components/AlbumList";
@@ -135,27 +135,33 @@ const Home = () => {
               <div>
                 <div className="flex flex-col">
                   <label htmlFor="name">Name</label>
-                  <input
+                  <Input
                     id="name"
                     name="name"
+                    bg="white"
                     onChange={handleInputForm}
                     placeholder="Insert your name"
                   />
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="description">Description</label>
-                  <textarea
+                  <Textarea
                     id="description"
                     name="description"
+                    bg="white"
                     onChange={handleInputForm}
                     rows="3"
                     placeholder="Insert your description"
                   />
                 </div>
     
-                <button className="bg-[#1db954] mt-6 text-gray-800 px-6 py-2 rounded-full font-bold">
-                  {loading ? "Loading" : "Add Playlist"}
-                </button>
+              <Button
+              type="submit"
+              isLoading={loading}
+              className="bg-[#1db954] mt-6 text-gray-800 px-6 py-2 rounded-full font-bold"
+            >
+              Add Playlist
+            </Button>
               </div>
             </form>
     
@@ -164,15 +170,18 @@ const Home = () => {
     
           {/* <div className="search-box mt-6 text-white"> */}
           <div className="search-box mt-6 text-white flex space-x-2">
-            <input
+            <Input
+              bg="white"
               onChange={handleChange}
               placeholder="Find tracks that you want"
               className="text-slate-600"
             />
             <div className="btn-wrapper">
-              <button className="btn" onClick={handleSearch}>
+              <Button 
+              width="full"
+              className="btn" onClick={handleSearch}>
                 Cari
-              </button>
+              </Button>
             </div>
           </div>
     
