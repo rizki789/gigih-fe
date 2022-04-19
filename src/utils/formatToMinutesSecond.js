@@ -1,5 +1,5 @@
-export const formatToMinutesSecond = (timeMS) => {
-    const minutes = Math.floor(timeMS / 60000);
-    const seconds = ((timeMS % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds ;
-};
+export const formatToMinutesSecond = (timeMs) => {
+    const minutes = Math.floor(timeMs / 60000);
+    const seconds = ((timeMs % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  };
