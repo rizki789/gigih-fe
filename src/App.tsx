@@ -11,24 +11,24 @@ import Header from './components/header';
 
 function App() {
   return (
-    <ChakraProvider>
-      <div className="bg-[#121212] min-h-screen">
-        <Provider store={store}>
-          <Router>
+    <div className="bg-[#121212] min-h-screen">
+      <Provider store={store}>
+        <Router>
+          <ChakraProvider>
             <Header />
-            <Switch>
-              <Route exact path="/">
-                <Login />
-              </Route>
-              <PrivateRoute
-                path="/create-playlist"
-                component={Home}
-              />
-            </Switch>
-          </Router>
-        </Provider>
-      </div>
-    </ChakraProvider>
+          </ChakraProvider>
+          <Switch>
+            <Route exact path="/">
+              <Login />
+            </Route>
+            <PrivateRoute
+              path="/create-playlist"
+              component={Home}
+            />
+          </Switch>
+        </Router>
+      </Provider>
+    </div>
   );
 }
 
