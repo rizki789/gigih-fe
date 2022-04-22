@@ -16,16 +16,16 @@ function App() {
         <Router>
           <ChakraProvider>
             <Header />
+            <Switch>
+              <Route exact path="/">
+                <Login />
+              </Route>
+              <PrivateRoute
+                path="/create-playlist"
+                component={Home}
+              />
+            </Switch>
           </ChakraProvider>
-          <Switch>
-            <Route exact path="/">
-              <Login />
-            </Route>
-            <PrivateRoute
-              path="/create-playlist"
-              component={Home}
-            />
-          </Switch>
         </Router>
       </Provider>
     </div>
