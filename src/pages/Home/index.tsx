@@ -139,92 +139,95 @@ function Home() {
   };
 
   return (
-    <div className="layout" style={{ paddingTop: 20 }}>
-      <div>
-        <Toaster />
-        <h2 className="text-3xl font-bold text-white pt-8">Add Playlist</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <div className="flex flex-col">
-              <label htmlFor="name">Name</label>
-              <Input
-                id="name"
-                name="name"
-                bg="white"
-                onChange={handleInputForm}
-                placeholder="Insert your name"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="description">Description</label>
-              <Textarea
-                id="description"
-                name="description"
-                bg="white"
-                onChange={handleInputForm}
-                rows={3}
-                placeholder="Insert your description"
-              />
-            </div>
+    <>
+      <Header />
+      <div className="layout" style={{ paddingTop: 20 }}>
+        <div>
+          <Toaster />
+          <h2 className="text-3xl font-bold text-white pt-8">Add Playlist</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <div className="flex flex-col">
+                <label htmlFor="name">Name</label>
+                <Input
+                  id="name"
+                  name="name"
+                  bg="white"
+                  onChange={handleInputForm}
+                  placeholder="Insert your name"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="description">Description</label>
+                <Textarea
+                  id="description"
+                  name="description"
+                  bg="white"
+                  onChange={handleInputForm}
+                  rows={3}
+                  placeholder="Insert your description"
+                />
+              </div>
 
-            <Button
-              type="submit"
-              isLoading={loading}
-              className="bg-[#1db954] mt-6 text-gray-800 px-6 py-2 rounded-full font-bold"
-            >
-              Add Playlist
-            </Button>
-          </div>
-        </form>
-
-        <hr className="mt-6 " />
-      </div>
-
-      {playlist.name || playlist.id ? (
-        <>
-          <div className="search-box mt-6 text-white flex space-x-2">
-            <Input
-              bg="white"
-              value={search}
-              onChange={handleChange}
-              placeholder="Find tracks that you want"
-              className="text-slate-600"
-            />
-            <div className="btn-wrapper">
               <Button
-                width="full"
-                className="bg-white text-black w-full py-2 rounded-lg"
-                onClick={handleSearch}
+                type="submit"
+                isLoading={loading}
+                className="bg-[#1db954] mt-6 text-gray-800 px-6 py-2 rounded-full font-bold"
               >
-                Cari
+                Add Playlist
               </Button>
             </div>
-          </div>
+          </form>
 
-          <button
-            type="submit"
-            className="w-full bg-[#1db954] mt-2 rounded-full py-2"
-            onClick={handleAdd}
-          >
-            Add to
-            {' '}
-            {playlist.name}
-            {' '}
-            Playlist
-          </button>
+          <hr className="mt-6 " />
+        </div>
 
-          <div style={{ width: '100%' }} className="text-white mt-4">
-            <AlbumList
-              data={data}
-              handleSelect={handleSelect}
-              selectedData={selectedData}
-            />
-          </div>
-        </>
-      ) : (
-        ''
-      )}
-    </div>
+        {playlist.name || playlist.id ? (
+          <>
+            <div className="search-box mt-6 text-white flex space-x-2">
+              <Input
+                bg="white"
+                value={search}
+                onChange={handleChange}
+                placeholder="Find tracks that you want"
+                className="text-slate-600"
+              />
+              <div className="btn-wrapper">
+                <Button
+                  width="full"
+                  className="bg-white text-black w-full py-2 rounded-lg"
+                  onClick={handleSearch}
+                >
+                  Cari
+                </Button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-[#1db954] mt-2 rounded-full py-2"
+              onClick={handleAdd}
+            >
+              Add to
+              {' '}
+              {playlist.name}
+              {' '}
+              Playlist
+            </button>
+
+            <div style={{ width: '100%' }} className="text-white mt-4">
+              <AlbumList
+                data={data}
+                handleSelect={handleSelect}
+                selectedData={selectedData}
+              />
+            </div>
+          </>
+        ) : (
+          ''
+        )}
+      </div>
+    </>
   );
 }
 export default Home;

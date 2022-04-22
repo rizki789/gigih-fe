@@ -15,7 +15,6 @@ function App() {
       <Provider store={store}>
         <Router>
           <ChakraProvider>
-            <Header />
             <Switch>
               <Route exact path="/">
                 <Login />
