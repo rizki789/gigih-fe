@@ -23,7 +23,7 @@ function Header() {
         <div>
           {accessToken ? (
             <button
-              type="submit"
+              type="button"
               className="bg-gray-50 text-slate-800 px-4 py-2 rounded-full"
               onClick={() => {
                 dispatch(removeAccessToken());
@@ -32,7 +32,7 @@ function Header() {
               Logout
             </button>
           ) : (
-            <p />
+            <p></p>
           )}
         </div>
       </div>
