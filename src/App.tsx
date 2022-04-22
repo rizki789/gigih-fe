@@ -7,7 +7,6 @@ import store from './store';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
 import Home from './pages/Home';
-import Header from './components/header';
 
 function App() {
   return (

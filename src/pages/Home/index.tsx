@@ -10,6 +10,7 @@ import { Item, MyPlaylistResponse } from '../../models/MyPlaylist';
 import { ProfileResponse } from '../../models/Profile';
 import { ItemTrack, SearchTracksResponse } from '../../models/SearchTracks';
 import { API_SPOTIFY } from '../../utils/constants';
+import Header from '../../components/header/index';
 
 type FormValue = {
   name: string;
