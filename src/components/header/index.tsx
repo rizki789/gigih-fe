@@ -23,7 +23,7 @@ function Header() {
         <div>
           {accessToken ? (
             <button
-              type="button"
+              type="reset"
               className="bg-gray-50 text-slate-800 px-4 py-2 rounded-full"
               onClick={() => {
                 dispatch(removeAccessToken());
