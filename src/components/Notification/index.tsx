@@ -1,4 +1,5 @@
-import { RiCheckDoubleFill } from "react-icons/ri";
+import { RiMvLine } from 'react-icons/ri';
+import React from 'react';
 
 type Props = {
   open: boolean;
@@ -6,16 +7,16 @@ type Props = {
   title: string;
 };
 
-const Notification = ({ open, message, title }: Props) => {
+function Notification({ open, message, title }: Props) {
   return (
-    <div className={`notification-box ${open ? "" : "hidden"}`}>
-      <RiCheckDoubleFill />
+    <div className={`notification-box ${open ? '' : 'hidden'}`}>
+      <RiMvLine />
       <div className="notification-message">
         <p className="title">{title}</p>
         <p className="text-mini">{message}</p>
       </div>
     </div>
   );
-};
+}
 
 export default Notification;

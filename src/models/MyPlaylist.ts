@@ -20,13 +20,17 @@ export interface Tracks {
   total: number;
 }
 
+export interface imagePlaylist{
+  url: string;
+}
+
 export interface Item {
   collaborative: boolean;
   description: string;
   external_urls: ExternalUrls;
   href: string;
   id: string;
-  images: Object[];
+  images: imagePlaylist[];
   name: string;
   owner: Owner;
   primary_color?: string;

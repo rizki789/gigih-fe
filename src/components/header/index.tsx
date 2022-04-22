@@ -1,9 +1,10 @@
-import { RiDiscLine } from "react-icons/ri";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { removeAccessToken } from "../../slices/authSlices";
+import { RiHeadphoneFill } from 'react-icons/ri';
+import React from 'react';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { removeAccessToken } from '../../slices/authSlices';
 
-const Header = () => {
+function Header() {
   const accessToken = useAppSelector((state) => state.auth.accessToken);
   const dispatch = useAppDispatch();
 
@@ -12,16 +13,17 @@ const Header = () => {
       <div className="layout flex justify-between items-center h-full">
         <div>
           <p
-            style={{ fontSize: "26pt", display: "flex", alignItems: "center" }}
+            style={{ fontSize: '26pt', display: 'flex', alignItems: 'center' }}
           >
-            m
-            <RiDiscLine />
-            sic
+            Denger
+            <RiHeadphoneFill />
+            Music
           </p>
         </div>
         <div>
           {accessToken ? (
             <button
+              type="submit"
               className="bg-gray-50 text-slate-800 px-4 py-2 rounded-full"
               onClick={() => {
                 dispatch(removeAccessToken());
@@ -30,11 +32,11 @@ const Header = () => {
               Logout
             </button>
           ) : (
-            <p></p>
+            <p />
           )}
         </div>
       </div>
     </header>
   );
-};
+}
 export default Header;

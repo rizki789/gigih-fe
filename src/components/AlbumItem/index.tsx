@@ -1,4 +1,5 @@
-import { ItemTrack } from "../../models/SearchTracks";
+import React from 'react';
+import { ItemTrack } from '../../models/SearchTracks';
 
 type Props = {
   data: ItemTrack;
@@ -6,13 +7,13 @@ type Props = {
   selectedData: string[];
 };
 
-const AlbumItem = ({ data, handleSelect, selectedData }: Props) => {
+function AlbumItem({ data, handleSelect, selectedData }: Props) {
   const dateHoursMin = new Date(Date.UTC(0, 0, 0, 0, 0, 0, data.duration_ms));
 
   return (
     <div className="album-info">
-      <div className="image-box" style={{ position: "relative" }}>
-        <div className="overlay"></div>
+      <div className="image-box" style={{ position: 'relative' }}>
+        <div className="overlay" />
         <img src={data.album.images[0].url} alt="" />
         <p className="image-box-text">{data.album.artists[0].name}</p>
       </div>
@@ -20,23 +21,32 @@ const AlbumItem = ({ data, handleSelect, selectedData }: Props) => {
         <div>
           <p className="album-title">{data.name}</p>
           <p className="album-mini-info">
-            {data.disc_number} songs, {dateHoursMin.getUTCMinutes()} hr{" "}
-            {dateHoursMin.getUTCSeconds()} min
+            {data.disc_number}
+            {' '}
+            songs,
+            {dateHoursMin.getUTCMinutes()}
+            {' '}
+            hr
+            {' '}
+            {dateHoursMin.getUTCSeconds()}
+            {' '}
+            min
           </p>
         </div>
 
         <div>
           <button
+            type="submit"
             className="btn btn-select"
             onClick={() => {
               handleSelect(data.uri);
             }}
           >
-            {selectedData.includes(data.uri) ? "Deselect" : "Select"}
+            {selectedData.includes(data.uri) ? 'Deselect' : 'Select'}
           </button>
         </div>
       </div>
     </div>
   );
-};
+}
 export default AlbumItem;

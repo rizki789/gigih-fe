@@ -1,33 +1,34 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Input, Textarea } from "@chakra-ui/react";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-import AlbumList from "../../components/AlbumList";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { Item, MyPlaylistResponse } from "../../models/MyPlaylist";
-import { ProfileResponse } from "../../models/Profile";
-import { ItemTrack, SearchTracksResponse } from "../../models/SearchTracks";
-import { API_SPOTIFY } from "../../utils/constants";
+import { Button, Input, Textarea } from '@chakra-ui/react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import AlbumList from '../../components/AlbumList';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { Item, MyPlaylistResponse } from '../../models/MyPlaylist';
+import { ProfileResponse } from '../../models/Profile';
+import { ItemTrack, SearchTracksResponse } from '../../models/SearchTracks';
+import { API_SPOTIFY } from '../../utils/constants';
 
 type FormValue = {
   name: string;
   description: string;
 };
 
-const Home = () => {
-  const [search, setSearch] = useState("");
+function Home() {
+  const [search, setSearch] = useState('');
   const [data, setData] = useState<ItemTrack[]>([]);
   const [selectedData, setSelectedData] = useState<string[]>([]);
   const [, setDataPlaylist] = useState<Item[]>([]);
   const [playlist, setPlaylist] = useState({
-    id: "",
-    name: "",
+    id: '',
+    name: '',
   });
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState('');
   const [form, setForm] = useState({
-    name: "",
-    description: "",
+    name: '',
+    description: '',
   });
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +36,7 @@ const Home = () => {
 
   const getProfileUser = async () => {
     const response = await axios.get<ProfileResponse>(
-      API_SPOTIFY + `me?access_token=${accessToken}`
+      `${API_SPOTIFY}me?access_token=${accessToken}`,
     );
     setUserId(response.data.id);
     return response.data;
@@ -43,24 +44,24 @@ const Home = () => {
 
   const getUserPlaylist = async () => {
     const response = await axios.get<MyPlaylistResponse>(
-      API_SPOTIFY + `me/playlists?access_token=${accessToken}`
+      `${API_SPOTIFY}me/playlists?access_token=${accessToken}`,
     );
     setDataPlaylist(response.data.items);
     return response.data;
   };
 
   const addTracksToPlaylist = async () => {
-    let allTracks = "";
+    let allTracks = '';
     selectedData.forEach((it: string) => {
-      allTracks += it + ",";
+      allTracks += `${it},`;
     });
     const response = await axios.post(
-      API_SPOTIFY +
-        `playlists/${playlist.id}/tracks?access_token=${accessToken}&uris=${allTracks}`
+      `${API_SPOTIFY
+      }playlists/${playlist.id}/tracks?access_token=${accessToken}&uris=${allTracks}`,
     );
-    toast.success("Tracks added");
+    toast.success('Tracks added');
     setSelectedData([]);
-    setSearch("");
+    setSearch('');
     setData([]);
     return response.data;
   };
@@ -68,19 +69,19 @@ const Home = () => {
   const createPlaylist = async (data: FormValue) => {
     setLoading(true);
     const response = await axios.post(
-      API_SPOTIFY + `users/${userId}/playlists?access_token=${accessToken}`,
+      `${API_SPOTIFY}users/${userId}/playlists?access_token=${accessToken}`,
       {
         ...data,
         public: false,
-      }
+      },
     );
     setLoading(false);
     setPlaylist(response.data);
     setForm({
-      name: "",
-      description: "",
+      name: '',
+      description: '',
     });
-    toast.success("Playlist successfully added");
+    toast.success('Playlist successfully added');
     return response.data;
   };
 
@@ -95,7 +96,7 @@ const Home = () => {
   }, [accessToken]);
 
   const handleInputForm = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -112,7 +113,7 @@ const Home = () => {
 
   const handleSearch = async () => {
     const response = await axios.get<SearchTracksResponse>(
-      `https://api.spotify.com/v1/search?q=${search}&access_token=${accessToken}&type=track`
+      `https://api.spotify.com/v1/search?q=${search}&access_token=${accessToken}&type=track`,
     );
     setData(response.data.tracks.items);
     return response.data;
@@ -201,13 +202,18 @@ const Home = () => {
           </div>
 
           <button
+            type="submit"
             className="w-full bg-[#1db954] mt-2 rounded-full py-2"
             onClick={handleAdd}
           >
-            Add to {playlist.name} Playlist
+            Add to
+            {' '}
+            {playlist.name}
+            {' '}
+            Playlist
           </button>
 
-          <div style={{ width: "100%" }} className="text-white mt-4">
+          <div style={{ width: '100%' }} className="text-white mt-4">
             <AlbumList
               data={data}
               handleSelect={handleSelect}
@@ -216,9 +222,9 @@ const Home = () => {
           </div>
         </>
       ) : (
-        ""
+        ''
       )}
     </div>
   );
-};
+}
 export default Home;

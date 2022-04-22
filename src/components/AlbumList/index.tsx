@@ -1,6 +1,7 @@
-import { ItemTrack } from "../../models/SearchTracks";
-import AlbumItem from "../AlbumItem";
-import styles from "./album-list.module.css";
+import React from 'react';
+import { ItemTrack } from '../../models/SearchTracks';
+import AlbumItem from '../AlbumItem';
+import styles from './album-list.module.css';
 
 type Props = {
   data: ItemTrack[];
@@ -8,7 +9,7 @@ type Props = {
   selectedData: string[];
 };
 
-const AlbumList = ({ data, handleSelect, selectedData }: Props) => {
+function AlbumList({ data, handleSelect, selectedData }: Props) {
   return (
     <div className={styles.listAlbum}>
       {data.map((item: ItemTrack) => (
@@ -21,6 +22,6 @@ const AlbumList = ({ data, handleSelect, selectedData }: Props) => {
       ))}
     </div>
   );
-};
+}
 
 export default AlbumList;
