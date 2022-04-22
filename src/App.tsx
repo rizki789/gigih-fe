@@ -2,12 +2,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import './App.css';
 import React from 'react';
+import { Provider } from 'react-redux';
+import store  from './store';
+import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
 import Home from './pages/Home';
-import PrivateRoute from './components/PrivateRoute';
 import Header from './components/header';
-import store  from './store';
-import { Provider } from 'react-redux';
 
 function App() {
   return (
